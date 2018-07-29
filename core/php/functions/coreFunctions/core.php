@@ -29,4 +29,14 @@ class core
 	{
 		return $this->getFile("content/".$layoutFileGen->modules->$module->content->group."/".$layoutFileGen->modules->$module->content->file.".".$layoutFileGen->modules->$module->content->type);
 	}
+
+	public function getPageXml($page, $default = false)
+	{
+		return simplexml_load_file($this->getFile("xml/content/".$page.".xml", $default));
+	}
+
+	public function getTemplateXml($page, $default = false)
+	{
+		return simplexml_load_file($this->getFile("xml/templates/".$page.".xml", $default));
+	}
 }
