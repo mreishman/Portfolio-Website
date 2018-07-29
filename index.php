@@ -1,6 +1,5 @@
 <?php
-require_once(dirname(__file__)."/core/php/functions/coreFunctions/core.php");
-$core = new Core();
+require_once(dirname(__file__)."/core/php/functions/loader.php");
 $page = "home";
 if (!empty($_GET['page']))
 {

@@ -8,3 +8,5 @@ core/content/templates/._oneColumn.php
 core/php/functions/coreFunctions/._core.php
 core/content/base/._footer.php
 core/content/base/._header.php
+core/content/base/._404.html
+core/php/functions/._loader.php
