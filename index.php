@@ -7,7 +7,7 @@ if (!empty($_GET['page']))
 }
 /* make sure page isn't bad*/
 
-$baseXmlGen = $core->getPageXml($page, "core/xml/404.xml");
+$baseXmlGen = $core->getPageXml($page, "core/xml/errors/404.xml");
 
 $layoutFileGen = $core->getTemplateXml($baseXmlGen->layout);
 

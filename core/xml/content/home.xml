@@ -2,6 +2,10 @@
 <page>
 	<layout>oneColumn</layout>
 	<title>Home Page!</title>
+	<menu>
+		<position>1</position>
+		<name>Home</name>
+	</menu>
 	<content>
 		<group>homepage</group>
 		<file>home</file>

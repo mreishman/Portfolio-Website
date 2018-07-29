@@ -15,6 +15,27 @@ class core
 		return $default;
 	}
 
+	public function loadDirFilesRec($directory, $arrayOfFiles = array(), $addedDir = "")
+	{
+		$fileList = array_diff(scandir($directory), array('..', '.'));
+		foreach ($fileList as $fileOrDir)
+		{
+			$entireFileOrDir = $directory."/".$fileOrDir;
+			if(is_dir($entireFileOrDir))
+			{
+				$arrayOfFiles = $this->loadDirFilesRec($entireFileOrDir, $arrayOfFiles, $addedDir."/".$fileOrDir);
+			}
+			elseif(is_file($entireFileOrDir) && strpos($fileOrDir, "._") !== 0)
+			{
+				$arrayOfFiles[$entireFileOrDir] = array(
+					"fileName"			=>	$fileOrDir,
+					"fileNamePlusPath"	=>	$addedDir."/".$fileOrDir
+				);
+			}
+		}
+		return $arrayOfFiles;
+	}
+
 	public function getContent($layoutFileGen)
 	{
 		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);
