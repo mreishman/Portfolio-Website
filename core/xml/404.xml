@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+	<layout>oneColumn</layout>
+	<content>
+		<group>base</group>
+		<file>fileNotFound</file>
+		<type>html</type>
+	</content>
+</page>
