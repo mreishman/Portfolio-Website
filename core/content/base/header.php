@@ -3,10 +3,7 @@
 		<ul>
 			<?php 
 			$navArr = $header->generateNavigationArray();
-			foreach ($navArr as $key => $value)
-			{
-				echo "<li>".$key."</li>";
-			}
+			echo $header->generateNavUL($navArr);
 			?>
 		</ul>
 	</nav>

@@ -2,7 +2,7 @@
 
 class header
 {
-	private function generateFileTier($newKeyArray, $position)
+	private function generateFileTier($newKeyArray, $fileTierInfo)
 	{
 		$newKey = $newKeyArray[0];
 		array_shift($newKeyArray);
@@ -10,15 +10,13 @@ class header
 		{
 			return array(
 				$newKey => array(
-					"files"	=> $this->generateFileTier($newKeyArray, $position)
+					"files"	=> $this->generateFileTier($newKeyArray, $fileTierInfo)
 				)
 			);
 		}
 		$newKey = str_replace(".xml", "", $newKey);
 		return array(
-			$newKey => array(
-				"position"	=>	$position
-			)
+			$newKey => $fileTierInfo
 		);
 	}
 
@@ -49,7 +47,12 @@ class header
 	{
 		$currentDir = realpath(__DIR__ . '/../../../..')."/";
 		$core = new Core();
-		$arrayOfFiles = $core->loadDirFilesRec($currentDir."core/xml/content/");
+		$xmlDir = $currentDir."core/xml/content/";
+		if(is_dir($currentDir."local/xml/content/"))
+		{
+			$xmlDir = $currentDir."local/xml/content/";
+		}
+		$arrayOfFiles = $core->loadDirFilesRec($xmlDir);
 		foreach ($arrayOfFiles as $currentFileKey => $currentFile)
 		{
 			$xmlLayout = simplexml_load_file($currentFileKey);
@@ -60,6 +63,10 @@ class header
 		$newNavArray = array();
 		foreach ($arrayOfFiles as $AOFvalue)
 		{
+			if($AOFvalue["position"] === 0)
+			{
+				continue; //skip if position is 0
+			}
 			$justPath = substr($AOFvalue["fileNamePlusPath"], 0, strrpos($AOFvalue["fileNamePlusPath"], '/'));
 			$keys = array($AOFvalue["fileName"]);
 			if(strlen($justPath) > 1)
@@ -68,10 +75,31 @@ class header
 				array_push($keys, $AOFvalue["fileName"]);
 				array_shift($keys);
 			}
-			$newNavArray = array_merge_recursive($newNavArray, $this->generateFileTier($keys, $AOFvalue["position"]));
+			$newNavArray = array_merge_recursive($newNavArray, $this->generateFileTier($keys, $AOFvalue));
 		}
 		$newNavArray = $this->modifyArrayAgain($newNavArray);
 		ksort($newNavArray);
 		return $newNavArray;
+	}
+
+	public function generateNavUL($navArray, $htmlToReturn = "")
+	{
+		$htmlToReturn .= "<ul>";
+		foreach ($navArray as $key => $value)
+		{
+			if(isset($value["files"]))
+			{
+				if(!empty($value["files"]))
+				{
+					$htmlToReturn .= "<li>".$value["name"].$this->generateNavUl($value["files"])."</li>";
+				}
+			}
+			else
+			{
+				$htmlToReturn .= "<li>".$value["name"]."</li>";
+			}
+		}
+		$htmlToReturn .= "</ul>";
+		return $htmlToReturn;
 	}
 }
