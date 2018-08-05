@@ -91,12 +91,12 @@ class header
 			{
 				if(!empty($value["files"]))
 				{
-					$htmlToReturn .= "<li>".$value["name"].$this->generateNavUl($value["files"])."</li>";
+					$htmlToReturn .= "<li><a href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a>".$this->generateNavUl($value["files"])."</li>";
 				}
 			}
 			else
 			{
-				$htmlToReturn .= "<li>".$value["name"]."</li>";
+				$htmlToReturn .= "<li><a href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a></li>";
 			}
 		}
 		$htmlToReturn .= "</ul>";
