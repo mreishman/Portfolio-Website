@@ -15,6 +15,20 @@ class core
 		return $default;
 	}
 
+	private function getFileWeb($fileLookFor, $default = false)
+	{
+		$currentDir = realpath(__DIR__ . '/../../../..')."/";
+		if(file_exists($currentDir."local/".$fileLookFor))
+		{
+			return "local/".$fileLookFor;
+		}
+		if(file_exists($currentDir."core/".$fileLookFor))
+		{
+			return "core/".$fileLookFor;
+		}
+		return $default;
+	}
+
 	public function loadDirFilesRec($directory, $arrayOfFiles = array(), $addedDir = "")
 	{
 		$fileList = array_diff(scandir($directory), array('..', '.'));
@@ -44,8 +58,9 @@ class core
 		$listOfCssFiles = $layoutFileGen->cssFiles;
 		foreach ($listOfCssFiles as $cssFile)
 		{
-			$filePath = $this->getFIle($cssFile->group.$cssFile->file);
-			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$filePath."\">."
+			$cssFile = $cssFile->cssFile;
+			$filePath = $this->getFileWeb("css/".$cssFile->group.$cssFile->file);
+			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
 		}
 		//return main file path
 		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);
