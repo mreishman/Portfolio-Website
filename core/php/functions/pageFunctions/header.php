@@ -2,6 +2,14 @@
 
 class header
 {
+
+	private $core;
+
+	public function __construct()
+	{
+		$this->core = new Core();
+	}
+
 	private function generateFileTier($newKeyArray, $fileTierInfo)
 	{
 		$newKey = $newKeyArray[0];
@@ -46,13 +54,12 @@ class header
 	public function generateNavigationArray()
 	{
 		$currentDir = realpath(__DIR__ . '/../../../..')."/";
-		$core = new Core();
 		$xmlDir = $currentDir."core/xml/content/";
 		if(is_dir($currentDir."local/xml/content/"))
 		{
 			$xmlDir = $currentDir."local/xml/content/";
 		}
-		$arrayOfFiles = $core->loadDirFilesRec($xmlDir);
+		$arrayOfFiles = $this->core->loadDirFilesRec($xmlDir);
 		foreach ($arrayOfFiles as $currentFileKey => $currentFile)
 		{
 			$xmlLayout = simplexml_load_file($currentFileKey);
