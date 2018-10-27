@@ -1,0 +1,45 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #CCC;
+  background-color: #333;
+}
+
+.navigationMain ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #CCC;
+}
+.navigationMain li {
+  float: left;
+}
+.navigationMain li a:hover, .navigationMain li .dropdown:hover .dropbtn {
+  background-color: red;
+}
+.navigationMain li.dropdown {
+  display: inline-block;
+}
+.navigationMain li ul {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.navigationMain li ul a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.navigationMain li ul a:hover {
+  background-color: #f1f1f1;
+}
+.navigationMain li ul:hover ul {
+  display: block;
+}
+
+/*# sourceMappingURL=base.css.map */

@@ -24,5 +24,10 @@
 	<javascriptFiles>
 	</javascriptFiles>
 	<cssFiles>
+		<cssFile>
+			<file>base.css</file>
+			<map>base.css.map</map>
+			<group></group>
+		</cssFile>
 	</cssFiles>
 </page>

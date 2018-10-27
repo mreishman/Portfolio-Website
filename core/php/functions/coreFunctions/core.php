@@ -38,6 +38,16 @@ class core
 
 	public function getContent($layoutFileGen)
 	{
+		//js files
+
+		//css files
+		$listOfCssFiles = $layoutFileGen->cssFiles;
+		foreach ($listOfCssFiles as $cssFile)
+		{
+			$filePath = $this->getFIle($cssFile->group.$cssFile->file);
+			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$filePath."\">."
+		}
+		//return main file path
 		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);
 	}
 
