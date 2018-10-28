@@ -55,17 +55,27 @@ class core
 		//js files
 
 		//css files
+		$listOfCssFiles = $this->generateCssLinks($layoutFileGen);
+		foreach ($listOfCssFiles as $filePath) {
+			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
+		}
+		//return main file path
+		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);
+	}
+
+	public function generateCssLinks($layoutFileGen)
+	{
+		$arrayOfCssFiles = array();
 		$listOfCssFiles = $layoutFileGen->cssFiles;
 		if(count($listOfCssFiles) > 0)
 		{
 			foreach ($listOfCssFiles[0] as $outer)
 			{
 				$filePath = $this->getFileWeb("css/".$outer->group.$outer->file);
-				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
+				array_push($arrayOfCssFiles, $filePath);
 			}
 		}
-		//return main file path
-		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);
+		return $arrayOfCssFiles;
 	}
 
 	public function getXml($page, $default = false)

@@ -17,6 +17,7 @@ foreach($directory as $dir)
 			{
 				continue;
 			}
+			//@TODO check if there is a local version of this file before load
 			$subDirName = $realpath."/".$dir."/".$subDir;
 			require_once($subDirName);
 			$className = explode(".", $subDir)[0];
