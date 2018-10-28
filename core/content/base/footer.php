@@ -1,3 +1,3 @@
 <footer>
-	<p>Powered by WebCoreMR</p>
+	<p>Powered by WebCoreMJR</p>
 </footer>

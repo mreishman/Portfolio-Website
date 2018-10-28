@@ -14,4 +14,8 @@ header {
   background-color: #CCC;
 }
 
+.mainContent {
+  min-height: 500px;
+}
+
 /*# sourceMappingURL=base.css.map */
