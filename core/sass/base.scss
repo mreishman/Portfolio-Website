@@ -1,5 +1,8 @@
 $fontStack:    Helvetica, sans-serif;
 $fontColorMain: #CCC;
+$linkColorAlt: #333;
+$linkColorMain: #CCC;
+$linkColorAlt: #333;
 $backgroundColorMain: #333;
 $backgroundColorAlt: #CCC;
 
@@ -7,6 +10,7 @@ body {
   font: 100% $fontStack;
   color: $fontColorMain;
   background-color: $backgroundColorMain;
+  margin: 0;
 }
 
 .navigationMain{
@@ -20,9 +24,17 @@ body {
 
 	li {
 		float: left;
+		padding: 12px 16px;
+
+		a{
+			text-decoration: none;
+			padding: 12px 16px;
+			color: $linkColorAlt;
+		}
 
 		a:hover, .dropdown:hover .dropbtn {
-		background-color: red;
+			background-color: $backgroundColorMain;
+			color: $fontColorMain;
 		}
 
 		&.dropdown {
@@ -36,6 +48,7 @@ body {
 			min-width: 160px;
 			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 			z-index: 1;
+			margin-top: 12px;
 
 			a {
 				color: black;
@@ -50,7 +63,7 @@ body {
 			}
 		}
 
-		ul:hover ul {
+		&:hover ul {
 			display: block;
 		}
 	}
