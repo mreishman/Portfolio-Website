@@ -56,11 +56,13 @@ class core
 
 		//css files
 		$listOfCssFiles = $layoutFileGen->cssFiles;
-		foreach ($listOfCssFiles as $cssFile)
+		if(count($listOfCssFiles) > 0)
 		{
-			$cssFile = $cssFile->cssFile;
-			$filePath = $this->getFileWeb("css/".$cssFile->group.$cssFile->file);
-			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
+			foreach ($listOfCssFiles[0] as $outer)
+			{
+				$filePath = $this->getFileWeb("css/".$outer->group.$outer->file);
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
+			}
 		}
 		//return main file path
 		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);

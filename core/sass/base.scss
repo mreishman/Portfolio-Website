@@ -1,10 +1,4 @@
-$fontStack:    Helvetica, sans-serif;
-$fontColorMain: #CCC;
-$linkColorAlt: #333;
-$linkColorMain: #CCC;
-$linkColorAlt: #333;
-$backgroundColorMain: #333;
-$backgroundColorAlt: #CCC;
+@import "vars.scss";
 
 body {
   font: 100% $fontStack;
@@ -13,58 +7,11 @@ body {
   margin: 0;
 }
 
-.navigationMain{
-	ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		background-color: $backgroundColorAlt;
-	}
+footer{
+	background-color: $backgroundColorMain2;
+	padding: 3px 10px;
+}
 
-	li {
-		float: left;
-		padding: 12px 16px;
-
-		a{
-			text-decoration: none;
-			padding: 12px 16px;
-			color: $linkColorAlt;
-		}
-
-		a:hover, .dropdown:hover .dropbtn {
-			background-color: $backgroundColorMain;
-			color: $fontColorMain;
-		}
-
-		&.dropdown {
-			display: inline-block;
-		}
-
-		ul {
-			display: none;
-			position: absolute;
-			background-color: #f9f9f9;
-			min-width: 160px;
-			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-			z-index: 1;
-			margin-top: 12px;
-
-			a {
-				color: black;
-				padding: 12px 16px;
-				text-decoration: none;
-				display: block;
-				text-align: left;
-
-				&:hover {
-					background-color: #f1f1f1
-				}
-			}
-		}
-
-		&:hover ul {
-			display: block;
-		}
-	}
+header{
+	background-color: $backgroundColorAlt;
 }
