@@ -7,15 +7,20 @@ body {
   margin: 0;
 }
 
-footer{
+footer {
 	background-color: $backgroundColorMain2;
 	padding: 3px 10px;
 }
 
-header{
+header {
 	background-color: $backgroundColorAlt;
 }
 
-.mainContent{
+a {
+	color: $fontColorMain;
+}
+
+.mainContent {
 	min-height: 500px;
+	padding: 10px;
 }

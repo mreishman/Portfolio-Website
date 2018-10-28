@@ -14,8 +14,13 @@ header {
   background-color: #CCC;
 }
 
+a {
+  color: #CCC;
+}
+
 .mainContent {
   min-height: 500px;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=base.css.map */
