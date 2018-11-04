@@ -4,6 +4,10 @@
 	display: none;
 }
 
+.navigationSpan{
+	display: inline-block;
+}
+
 .navigationMain{
 
 	margin-bottom: 5px;
@@ -118,6 +122,7 @@
 .mobileNavButton{
 	cursor: pointer;
 	display: none;
+	float: right;
 }
 
 .navIconChecked{
@@ -129,6 +134,10 @@
 }
 
 @media only screen and (max-width : 640px) {
+
+	.navigationSpan{
+		display: block;
+	}
 
 	.navigationMain{
 
