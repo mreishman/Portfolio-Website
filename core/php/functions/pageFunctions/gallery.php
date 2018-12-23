@@ -10,6 +10,9 @@ class gallery
 		$imgWidth = "auto";
 		$imgHeight = "auto";
 		$arrows = true;
+		$galleryThumbWidth = "50";
+		$galleryThumbHeight = "auto";
+		$galleryThumbs = true;
 		//Check for custom settings
 		if(isset($config["tag"]))
 		{
@@ -26,6 +29,18 @@ class gallery
 		if(isset($config["arrows"]))
 		{
 			$arrows = $config["arrows"];
+		}
+		if(isset($config["galleryThumbWidth"]))
+		{
+			$galleryThumbWidth = $config["galleryThumbWidth"];
+		}
+		if(isset($config["galleryThumbHeight"]))
+		{
+			$galleryThumbHeight = $config["galleryThumbHeight"];
+		}
+		if(isset($config["galleryThumbs"]))
+		{
+			$galleryThumbs = $config["galleryThumbs"];
 		}
 		$arrayOfImagesCount = count($arrayOfImages);
 		$arrayOfImagesCounter = 0;
@@ -89,6 +104,69 @@ class gallery
 				{
 					$htmlToReturn .= "
 						<a href=\"#".$arrayOfImagesGen[($arrayOfImagesCounter+1)]["id"]."\" class=\"arrow right lightboxRight\" ></a>";
+				}
+				if($galleryThumbs)
+				{
+					if($arrayOfImagesCounter !== 0)
+					{
+						$leftThumbHtml = "";
+						$newCounter = 0;
+						foreach ($arrayOfImages as $value2)
+						{
+							if($newCounter >= $arrayOfImagesCounter)
+							{
+								break;
+							}
+							$thumb2 = $value2["src"];
+							$link2 = "#".$value2["id"];
+							if(isset($value2["thumb"]))
+							{
+								$thumb2 = $value2["thumb"];
+							}
+							$leftThumbHtml .= "
+							<a href=\"".$link2 ."\" >
+								<img class=\"galleryFSThumb\" width=\"".$galleryThumbWidth."px\" height=\"".$galleryThumbHeight."\" src=\"".$thumb2."\">
+							</a>
+							";
+							$newCounter++;
+
+						}
+						$htmlToReturn .= "<div style=\"margin-right: ".($galleryThumbWidth/2)."px; width:".(($galleryThumbWidth+20)*($newCounter))."px;\" class=\"galleryThumbsLeft\">";
+						$htmlToReturn .= $leftThumbHtml;
+						$htmlToReturn .= "</div>";
+					}
+					$htmlToReturn .= "
+						<img style=\"margin-left:-".($galleryThumbWidth/2)."px\" class=\"galleryFullScreenThumbCenter galleryFSThumb currentThumb\" width=\"".$galleryThumbWidth."px\" height=\"".$galleryThumbHeight."\" src=\"".$thumb."\">";
+					if(($arrayOfImagesCounter + 1) < $arrayOfImagesCount)
+					{
+						$leftThumbHtml = "";
+						$newCounter = 0;
+						$imageCounter = 0;
+						foreach ($arrayOfImages as $value2)
+						{
+							$newCounter++;
+							if(($newCounter - 1) <= $arrayOfImagesCounter)
+							{
+								continue;
+							}
+							$thumb2 = $value2["src"];
+							$link2 = "#".$value2["id"];
+							if(isset($value2["thumb"]))
+							{
+								$thumb2 = $value2["thumb"];
+							}
+							$leftThumbHtml .= "
+							<a href=\"".$link2 ."\" >
+								<img class=\"galleryFSThumb\" width=\"".$galleryThumbWidth."px\" height=\"".$galleryThumbHeight."\" src=\"".$thumb2."\">
+							</a>
+							";
+							$imageCounter++;
+
+						}
+						$htmlToReturn .= "<div style=\"margin-left: ".(($galleryThumbWidth/1.5))."px; width:".(($galleryThumbWidth+20)*($imageCounter))."px;\" class=\"galleryThumbsRight\">";
+						$htmlToReturn .= $leftThumbHtml;
+						$htmlToReturn .= "</div>";
+					}
 				}
 				$htmlToReturn .= "
 					</span>";
