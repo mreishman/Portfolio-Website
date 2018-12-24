@@ -12,6 +12,14 @@ class core
 		{
 			return $currentDir."core/".$fileLookFor;
 		}
+		if(file_exists($currentDir."local/".$default))
+		{
+			return $currentDir."local/".$default;
+		}
+		if(file_exists($currentDir."core/".$default))
+		{
+			return $currentDir."core/".$default;
+		}
 		return $default;
 	}
 
@@ -63,7 +71,7 @@ class core
 			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
 		}
 		//return main file path
-		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type);
+		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type,"content/base/404.html");
 	}
 
 	public function generateCssLinks($layoutFileGen)
