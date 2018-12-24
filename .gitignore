@@ -3,3 +3,11 @@
 core/css/vars.css
 core/css/vars.css.map
 local/*
+Log-Hog/*
+status/*
+
+
+media/*
+!media/img/about/filestructure.png
+!media/img/main/favicon.png
+!media/img/main/logo.png
