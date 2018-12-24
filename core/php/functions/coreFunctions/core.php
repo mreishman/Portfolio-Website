@@ -40,6 +40,20 @@ class core
 				"time"		=>	filemtime("core/".$fileLookFor)
 			);
 		}
+		if(file_exists($currentDir."local/".$default))
+		{
+			return array(
+				"fileName"	=>	"local/".$default,
+				"time"		=>	filemtime("local/".$default)
+			);
+		}
+		if(file_exists($currentDir."core/".$default))
+		{
+			return array(
+				"fileName"	=>	"core/".$default,
+				"time"		=>	filemtime("core/".$default)
+			);
+		}
 		return array(
 				"fileName"	=>	$default,
 				"time"		=>	1
