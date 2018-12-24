@@ -28,13 +28,22 @@ class core
 		$currentDir = realpath(__DIR__ . '/../../../..')."/";
 		if(file_exists($currentDir."local/".$fileLookFor))
 		{
-			return "local/".$fileLookFor;
+			return array(
+				"fileName"	=>	"local/".$fileLookFor,
+				"time"		=>	filemtime("local/".$fileLookFor)
+			);
 		}
 		if(file_exists($currentDir."core/".$fileLookFor))
 		{
-			return "core/".$fileLookFor;
+			return array(
+				"fileName"	=>	"core/".$fileLookFor,
+				"time"		=>	filemtime("core/".$fileLookFor)
+			);
 		}
-		return $default;
+		return array(
+				"fileName"	=>	$default,
+				"time"		=>	1
+			);
 	}
 
 	public function loadDirFilesRec($directory, $arrayOfFiles = array(), $addedDir = "")
@@ -62,13 +71,13 @@ class core
 	{
 		//js files
 		$listOfJsFiles = $this->generateJsLinks($layoutFileGen);
-		foreach ($listOfJsFiles as $filePath) {
-			echo "<script type=\"text/javascript\" src=\"".$filePath."\"></script>";
+		foreach ($listOfJsFiles as $fileData) {
+			echo "<script type=\"text/javascript\" src=\"".$fileData["fileName"]."?v=".$fileData["time"]."\"></script>";
 		}
 		//css files
 		$listOfCssFiles = $this->generateCssLinks($layoutFileGen);
-		foreach ($listOfCssFiles as $filePath) {
-			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$filePath."\">";
+		foreach ($listOfCssFiles as $fileData) {
+			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$fileData["fileName"]."?v=".$fileData["time"]."\">";
 		}
 		//return main file path
 		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type,"content/base/404.html");
@@ -82,8 +91,8 @@ class core
 		{
 			foreach ($listOfCssFiles[0] as $outer)
 			{
-				$filePath = $this->getFileWeb("css/".$outer->group.$outer->file);
-				array_push($arrayOfCssFiles, $filePath);
+				$fileData = $this->getFileWeb("css/".$outer->group.$outer->file);
+				array_push($arrayOfCssFiles, $fileData);
 			}
 		}
 		return $arrayOfCssFiles;
@@ -97,8 +106,8 @@ class core
 		{
 			foreach ($listOfJsFiles[0] as $outer)
 			{
-				$filePath = $this->getFileWeb("js/".$outer->group.$outer->file);
-				array_push($arrayOfJsFiles, $filePath);
+				$fileData = $this->getFileWeb("js/".$outer->group.$outer->file);
+				array_push($arrayOfJsFiles, $fileData);
 			}
 		}
 		return $arrayOfJsFiles;
