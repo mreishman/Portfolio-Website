@@ -90,8 +90,13 @@ class gallery
 			{
 				$thumb = $value["thumb"];
 			}
+			$target = "";
+			if(isset($value["target"]))
+			{
+				$target = " target=\"".$value["target"]."\"";
+			}
 			$htmlToReturn .= 	"
-				<a href=\"".$link."\" >
+				<a href=\"".$link."\"".$target.">
 					<img src=\"".$thumb."\" width=\"".$imgWidth."\" height=\"".$imgHeight."\" >
 				</a>";
 			if($link === "#".$id)
