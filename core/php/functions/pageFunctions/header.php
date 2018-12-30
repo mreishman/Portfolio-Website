@@ -66,6 +66,17 @@ class header
 			$arrayOfFiles[$currentFileKey]["position"] = intval($xmlLayout->menu->position);
 			$arrayOfFiles[$currentFileKey]["name"] = (string)$xmlLayout->menu->name;
 			$arrayOfFiles[$currentFileKey]["key"] = (string)$xmlLayout->menu->key;
+			$current = 0;
+			$currentURI = "$_SERVER[REQUEST_URI]";
+			if("$_SERVER[REQUEST_URI]" === "/")
+			{
+				$currentURI = "/home";
+			}
+			if($currentURI === explode(".xml", $arrayOfFiles[$currentFileKey]["fileNamePlusPath"])[0])
+			{
+				$current = 1;
+			}
+			$arrayOfFiles[$currentFileKey]["current"] = $current;
 		}
 		$newNavArray = array();
 		foreach ($arrayOfFiles as $AOFvalue)
@@ -89,6 +100,25 @@ class header
 		return $newNavArray;
 	}
 
+	private function findIfSubCurrent($files)
+	{
+		foreach ($files as $name => $file)
+		{
+			if(isset($file["files"]))
+			{
+				if(!empty($file["files"]) && $this->findIfSubCurrent($file["files"]))
+				{
+					return true;
+				}
+			}
+			if($file["current"] === 1)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function generateNavUL($navArray, $htmlToReturn = "")
 	{
 		$htmlToReturn .= "<ul>";
@@ -98,12 +128,25 @@ class header
 			{
 				if(!empty($value["files"]))
 				{
-					$htmlToReturn .= "<li><a href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a>".$this->generateNavUl($value["files"])."</li>";
+					$current = $this->findIfSubCurrent($value["files"]);
+					$classToAdd = " class=\"";
+					if($current)
+					{
+						$classToAdd .= " active ";
+					}
+					$classToAdd .= " \"";
+					$htmlToReturn .= "<li><a ".$classToAdd." href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a>".$this->generateNavUl($value["files"])."</li>";
 				}
 			}
 			else
 			{
-				$htmlToReturn .= "<li><a href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a></li>";
+				$classToAdd = " class=\"";
+				if($value["current"] === 1)
+				{
+					$classToAdd .= " active ";
+				}
+				$classToAdd .= " \"";
+				$htmlToReturn .= "<li><a ".$classToAdd." href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a></li>";
 			}
 		}
 		$htmlToReturn .= "</ul>";
