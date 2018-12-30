@@ -134,6 +134,10 @@ class header
 					{
 						$classToAdd .= " active ";
 					}
+					elseif($value["current"] === 1)
+					{
+						$classToAdd .= " active ";
+					}
 					$classToAdd .= " \"";
 					$htmlToReturn .= "<li><a ".$classToAdd." href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a>".$this->generateNavUl($value["files"])."</li>";
 				}
