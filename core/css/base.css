@@ -26,6 +26,7 @@ a {
 .mainContent {
   min-height: 500px;
   padding: 10px;
+  display: inline-block;
 }
 
 .column {
@@ -110,6 +111,12 @@ a {
 
 .width100 {
   width: 100%;
+}
+
+@media only screen and (max-width: 640px) {
+  .column {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=base.css.map */
