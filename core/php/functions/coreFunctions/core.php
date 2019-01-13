@@ -82,7 +82,7 @@ class core
 		return $arrayOfFiles;
 	}
 
-	public function getContent($layoutFileGen)
+	public function getContent($layoutFileGen, $contentType = "content")
 	{
 		//js files
 		$listOfJsFiles = $this->generateJsLinks($layoutFileGen);
@@ -95,7 +95,7 @@ class core
 			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$fileData["fileName"]."?v=".$fileData["time"]."\">";
 		}
 		//return main file path
-		return $this->getFile("content/".$layoutFileGen->content->group."/".$layoutFileGen->content->file.".".$layoutFileGen->content->type,"content/base/404.html");
+		return $this->getFile("content/".$layoutFileGen->$contentType->group."/".$layoutFileGen->$contentType->file.".".$layoutFileGen->$contentType->type,"content/base/404.html");
 	}
 
 	public function generateCssLinks($layoutFileGen)
