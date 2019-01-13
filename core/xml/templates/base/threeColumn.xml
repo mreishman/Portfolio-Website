@@ -2,7 +2,7 @@
 <page>
 	<content>
 		<group>templates</group>
-		<file>twoColumn</file>
+		<file>threeColumn</file>
 		<type>php</type>
 	</content>
 	<modules>
