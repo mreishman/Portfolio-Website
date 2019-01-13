@@ -147,4 +147,18 @@ class core
 	{
 		return simplexml_load_file($this->getFile("xml/templates/".$page.".xml", $default));
 	}
+
+	public function ifCheckArray($object, $array)
+	{
+		foreach ($array as $value)
+		{
+			$testObj = $object->$value;
+			if(gettype($testObj) !== "object")
+			{
+				return false;
+			}
+			$object = $testObj;
+		}
+		return true;
+	}
 }

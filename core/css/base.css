@@ -26,6 +26,11 @@ a {
 .mainContent {
   min-height: 500px;
   padding: 10px;
+}
+
+.mainContentInline {
+  min-height: 500px;
+  padding: 10px;
   display: inline-block;
 }
 

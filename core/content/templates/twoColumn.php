@@ -7,17 +7,12 @@
 	</head>
 	<body>
 		<?php require_once($core->getModule($layoutFileGen,"header")); ?>
-		<div class="mainContent" >
+		<div class="mainContentInline">
 			<?php
 				$contentClass = "50";
-				//@TODO move to if check layer function (pass array, return bool)
-				if($layoutFileGen->settings && $layoutFileGen->settings->body && $layoutFileGen->settings->body->mainContent && $layoutFileGen->settings->body->mainContent->content)
+				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","content","columnWidth")))
 				{
-					$possibleContentClass = $layoutFileGen->settings->body->mainContent->content->columnWidth;
-					if($possibleContentClass)
-					{
-						$contentClass = $possibleContentClass;
-					}
+					$contentClass = $layoutFileGen->settings->body->mainContent->content->columnWidth;
 				}
 			?>
 			<div class="column width<?php echo $contentClass; ?>">
@@ -26,13 +21,9 @@
 			</div>
 			<?php
 				$contentClass = "50";
-				if($layoutFileGen->settings && $layoutFileGen->settings->body && $layoutFileGen->settings->body->mainContent && $layoutFileGen->settings->body->mainContent->content)
+				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentTwo","columnWidth")))
 				{
-					$possibleContentClass = $layoutFileGen->settings->body->mainContent->content->columnWidth;
-					if($possibleContentClass)
-					{
-						$contentClass = $possibleContentClass;
-					}
+					$contentClass = $layoutFileGen->settings->body->mainContent->contentTwo->columnWidth;
 				}
 			?>
 	  		<div class="column width<?php echo $contentClass; ?>">
