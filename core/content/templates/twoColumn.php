@@ -14,6 +14,13 @@
 				{
 					$contentClass = $layoutFileGen->settings->body->mainContent->content->columnWidth;
 				}
+				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","content","hideMobile")))
+				{
+					if($layoutFileGen->settings->body->mainContent->content->columnWidth === "true")
+					{
+						$contentClass .= " hideMobile";
+					}
+				}
 			?>
 			<div class="column width<?php echo $contentClass; ?>">
 				<!-- Default content -->
@@ -24,6 +31,13 @@
 				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentTwo","columnWidth")))
 				{
 					$contentClass = $layoutFileGen->settings->body->mainContent->contentTwo->columnWidth;
+				}
+				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentTwo","hideMobile")))
+				{
+					if($layoutFileGen->settings->body->mainContent->contentTwo->columnWidth === "true")
+					{
+						$contentClass .= " hideMobile";
+					}
 				}
 			?>
 	  		<div class="column width<?php echo $contentClass; ?>">
