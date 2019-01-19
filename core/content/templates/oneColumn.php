@@ -6,11 +6,23 @@
 		<link rel="shortcut icon" type="image/png" href="/media/img/main/favicon.png"/>
 	</head>
 	<body>
-		<?php require_once($core->getModule($layoutFileGen,"header")); ?>
+		<?php
+			$headerModules = $core->getModules($layoutFileGen,"header");
+			foreach ($headerModules as $module)
+			{
+				require_once($module);
+			}
+		?>
 		<div class="mainContent" >
 			<!-- Default content -->
 			<?php require_once($core->getContent($baseXmlGen)); ?>
 		</div>
-		<?php require_once($core->getModule($layoutFileGen,"footer")); ?>
+		<?php
+			$headerModules = $core->getModules($layoutFileGen,"footer");
+			foreach ($headerModules as $module)
+			{
+				require_once($module);
+			}
+		?>
 	</body>
 </html>

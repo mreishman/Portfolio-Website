@@ -133,9 +133,25 @@ class core
 		return simplexml_load_file($this->getFile("xml/".$page.".xml", $default));
 	}
 
-	public function getModule($layoutFileGen, $module)
+	public function getModules($layoutFileGen, $moduleGroup)
 	{
-		return $this->getFile("content/".$layoutFileGen->modules->$module->content->group."/".$layoutFileGen->modules->$module->content->file.".".$layoutFileGen->modules->$module->content->type);
+		$modules = $layoutFileGen->modules->$moduleGroup;
+		$arrayOfFiles = array();
+		foreach ($modules as $mod)
+		{
+			if((string)$mod->module->enabled === "false")
+			{
+				continue;
+			}
+			$arrayOfFiles[] = $this->getModule($mod->module->name); 
+		}
+		return $arrayOfFiles;
+	}
+
+	public function getModule($module)
+	{
+		$moduleContent = simplexml_load_file($this->getFile("modules/".$module."/layout.xml"));
+		return $this->getContent($moduleContent);
 	}
 
 	public function getPageXml($page, $default = false)
