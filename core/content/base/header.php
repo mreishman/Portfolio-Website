@@ -23,8 +23,13 @@
 	</nav>
 </header>
 <?php
+	$arrayOfObjects = array($baseXmlGen, $layoutFileGen);
+	if(isset($module))
+	{
+		$arrayOfObjects[] = $module["moreInfo"];
+	}
 	$mobileNavPosition = $core->getSetting(
-		array($baseXmlGen, $layoutFileGen, $module["moreInfo"]),
+		$arrayOfObjects,
 		array("settings","body","module","header","mobileNavPosition"),
 		"right");
 ?>
