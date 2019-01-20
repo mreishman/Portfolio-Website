@@ -10,7 +10,7 @@
 			$headerModules = $core->getModules($layoutFileGen,"header");
 			foreach ($headerModules as $module)
 			{
-				require_once($module);
+				require_once($module["file"]);
 			}
 		?>
 		<div class="mainContent" >
@@ -21,7 +21,7 @@
 			$headerModules = $core->getModules($layoutFileGen,"footer");
 			foreach ($headerModules as $module)
 			{
-				require_once($module);
+				require_once($module["file"]);
 			}
 		?>
 	</body>

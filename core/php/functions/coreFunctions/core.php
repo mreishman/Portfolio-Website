@@ -143,15 +143,18 @@ class core
 			{
 				continue;
 			}
-			$arrayOfFiles[] = $this->getModule($mod->module->name); 
+			$modXml = $this->getModuleXml($mod->module->name);
+			$arrayOfFiles[(string)$mod->module->name] = array(
+				"file"		=> $this->getContent($modXml),
+				"moreInfo"	=> $modXml
+			); 
 		}
 		return $arrayOfFiles;
 	}
 
-	public function getModule($module)
+	public function getModuleXml($module)
 	{
-		$moduleContent = simplexml_load_file($this->getFile("modules/".$module."/layout.xml"));
-		return $this->getContent($moduleContent);
+		return simplexml_load_file($this->getFile("modules/".$module."/layout.xml"));
 	}
 
 	public function getPageXml($page, $default = false)
@@ -171,10 +174,23 @@ class core
 			$testObj = $object->$value;
 			if(gettype($testObj) !== "object")
 			{
-				return false;
+				return null;
 			}
 			$object = $testObj;
 		}
-		return true;
+		return $object;
+	}
+
+	public function getSetting($arrOfObjects, $settingPath, $default)
+	{
+		foreach ($arrOfObjects as $xmlObjectCheck)
+		{
+			$value = $this->ifCheckArray($xmlObjectCheck, $settingPath);
+			if($value !== null)
+			{
+				return $value;
+			}
+		}
+		return $default;
 	}
 }

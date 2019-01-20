@@ -12,4 +12,13 @@
 			<group></group>
 		</cssFile>
 	</cssFiles>
+	<settings>
+		<body>
+			<module>
+				<header>
+					<mobileNavPosition>right</mobileNavPosition>
+				</header>
+			</module>
+		</body>
+	</settings>
 </page>

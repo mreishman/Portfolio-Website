@@ -22,3 +22,14 @@
 		</span>
 	</nav>
 </header>
+<?php
+	$mobileNavPosition = $core->getSetting(
+		array($baseXmlGen, $layoutFileGen, $module["moreInfo"]),
+		array("settings","body","module","header","mobileNavPosition"),
+		"right");
+?>
+<style type="text/css">
+	.mobileNavButton{
+		float: <?php echo $mobileNavPosition; ?>
+	}
+</style>
