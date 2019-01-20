@@ -133,6 +133,40 @@ class core
 		return simplexml_load_file($this->getFile("xml/".$page.".xml", $default));
 	}
 
+	public function getModule($layoutFileGenArr, $module)
+	{
+		if(gettype($layoutFileGenArr) !== "array")
+		{
+			$layoutFileGenArr = array($layoutFileGenArr);
+		}
+		foreach ($layoutFileGenArr as $layoutFileGen)
+		{
+			//go through all modules, get just one
+			$modules = $layoutFileGen->modules;
+			foreach ($modules as $modGroup)
+			{
+				foreach ($modGroup as $mod)
+				{
+					$modName = (string)$mod->module->name;
+					if($modName !== $module)
+					{
+						continue;
+					}
+					if((string)$mod->module->enabled === "false")
+					{
+						return false;
+					}
+					$modXml = $this->getModuleXml($modName);
+					return array(
+						"file"		=> $this->getContent($modXml),
+						"moreInfo"	=> $modXml
+					); 
+				}
+			}
+		}
+		return false;
+	}
+
 	public function getModules($layoutFileGen, $moduleGroup)
 	{
 		$modules = $layoutFileGen->modules->$moduleGroup;

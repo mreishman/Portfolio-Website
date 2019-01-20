@@ -10,7 +10,7 @@
 			$headerModules = $core->getModules($layoutFileGen,"header");
 			foreach ($headerModules as $module)
 			{
-				require_once($module);
+				require_once($module["file"]);
 			}
 		?>
 		<div class="mainContentInline">
@@ -29,8 +29,22 @@
 				}
 			?>
 			<div class="column width<?php echo $contentClass; ?>">
-				<!-- Default content -->
-				<?php include($core->getContent($baseXmlGen)); ?>
+				<?php
+					$contentType 		= (string)$core->getSetting(
+						array($baseXmlGen, $layoutFileGen),
+						array("settings","body","mainContent","content","type"),
+						"custom");
+					if($contentType !== "custom")
+					{
+						$module = $core->getModule(array($baseXmlGen, $layoutFileGen), $contentType);
+						require_once($module["file"]);
+					}
+					else
+					{
+						include($core->getContent($baseXmlGen));
+							
+					}
+				?>
 			</div>
 			<?php
 				$contentClass 	= $core->getSetting(
@@ -55,7 +69,7 @@
 			$headerModules = $core->getModules($layoutFileGen,"footer");
 			foreach ($headerModules as $module)
 			{
-				require_once($module);
+				require_once($module["file"]);
 			}
 		?>
 	</body>

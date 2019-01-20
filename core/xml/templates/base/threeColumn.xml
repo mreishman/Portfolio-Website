@@ -12,6 +12,12 @@
 				<enabled>true</enabled>
 			</module>
 		</header>
+		<mainContentInline>
+			<module>
+				<name>sidebarNavigation</name>
+				<enabled>true</enabled>
+			</module>
+		</mainContentInline>
 		<footer>
 			<module>
 				<name>footer</name>
