@@ -33,10 +33,5 @@
 			<map>base.css.map</map>
 			<group></group>
 		</cssFile>
-		<cssFile>
-			<file>lightbox.css</file>
-			<map></map>
-			<group></group>
-		</cssFile>
 	</cssFiles>
 </page>

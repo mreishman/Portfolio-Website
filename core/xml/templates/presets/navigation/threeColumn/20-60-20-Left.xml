@@ -12,6 +12,12 @@
 				<enabled>true</enabled>
 			</module>
 		</header>
+		<mainContentInline>
+			<module>
+				<name>sidebarNavigation</name>
+				<enabled>true</enabled>
+			</module>
+		</mainContentInline>
 		<footer>
 			<module>
 				<name>footer</name>
@@ -25,11 +31,6 @@
 		<cssFile>
 			<file>base.css</file>
 			<map>base.css.map</map>
-			<group></group>
-		</cssFile>
-		<cssFile>
-			<file>lightbox.css</file>
-			<map></map>
 			<group></group>
 		</cssFile>
 	</cssFiles>
