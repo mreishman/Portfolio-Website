@@ -7,18 +7,16 @@
 	</content>
 	<modules>
 		<header>
-			<content>
-				<group>base</group>
-				<file>header</file>
-				<type>php</type>
-			</content>
+			<module>
+				<name>header</name>
+				<enabled>true</enabled>
+			</module>
 		</header>
 		<footer>
-			<content>
-				<group>base</group>
-				<file>footer</file>
-				<type>php</type>
-			</content>
+			<module>
+				<name>footer</name>
+				<enabled>true</enabled>
+			</module>
 		</footer>
 	</modules>
 	<javascriptFiles>
@@ -27,11 +25,6 @@
 		<cssFile>
 			<file>base.css</file>
 			<map>base.css.map</map>
-			<group></group>
-		</cssFile>
-		<cssFile>
-			<file>navigation.css</file>
-			<map>navigation.css.map</map>
 			<group></group>
 		</cssFile>
 		<cssFile>
