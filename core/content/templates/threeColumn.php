@@ -9,17 +9,17 @@
 		<?php require_once($core->getModule($layoutFileGen,"header")); ?>
 		<div class="mainContentInline">
 			<?php
-				$contentClass = "30";
-				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","content","columnWidth")))
+				$contentClass 	= $core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","content","columnWidth"),
+					"30");
+				$hideMobile 		= (string)$core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","content","hideMobile"),
+					"false");
+				if($hideMobile === "true")
 				{
-					$contentClass = $layoutFileGen->settings->body->mainContent->content->columnWidth;
-				}
-				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","content","hideMobile")))
-				{
-					if($layoutFileGen->settings->body->mainContent->content->columnWidth === "true")
-					{
-						$contentClass .= " hideMobile";
-					}
+					$contentClass .= " hideMobile";
 				}
 			?>
 			<div class="column width<?php echo $contentClass; ?>">
@@ -27,17 +27,17 @@
 				<?php include($core->getContent($baseXmlGen)); ?>
 			</div>
 			<?php
-				$contentClass = "40";
-				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentTwo","columnWidth")))
+				$contentClass 	= $core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","contentThree","columnWidth"),
+					"40");
+				$hideMobile 		= (string)$core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","contentThree","hideMobile"),
+					"false");
+				if($hideMobile === "true")
 				{
-					$contentClass = $layoutFileGen->settings->body->mainContent->contentTwo->columnWidth;
-				}
-				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentTwo","hideMobile")))
-				{
-					if($layoutFileGen->settings->body->mainContent->contentTwo->columnWidth === "true")
-					{
-						$contentClass .= " hideMobile";
-					}
+					$contentClass .= " hideMobile";
 				}
 			?>
 	  		<div class="column width<?php echo $contentClass; ?>">
@@ -45,17 +45,17 @@
 	  			<?php include($core->getContent($baseXmlGen, "contentTwo")); ?>
 	  		</div>
 	  		<?php
-				$contentClass = "30";
-				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentThree","columnWidth")))
+	  			$contentClass 	= $core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","contentThree","columnWidth"),
+					"30");
+				$hideMobile 		= (string)$core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","contentThree","hideMobile"),
+					"false");
+				if($hideMobile === "true")
 				{
-					$contentClass = $layoutFileGen->settings->body->mainContent->contentThree->columnWidth;
-				}
-				if($core->ifCheckArray($layoutFileGen, array("settings","body","mainContent","contentThree","hideMobile")))
-				{
-					if($layoutFileGen->settings->body->mainContent->contentThree->columnWidth === "true")
-					{
-						$contentClass .= " hideMobile";
-					}
+					$contentClass .= " hideMobile";
 				}
 			?>
 	  		<div class="column width<?php echo $contentClass; ?>">

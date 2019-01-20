@@ -155,10 +155,22 @@ class core
 			$testObj = $object->$value;
 			if(gettype($testObj) !== "object")
 			{
-				return false;
+				return null;
 			}
 			$object = $testObj;
 		}
-		return true;
+		return $object;
 	}
+
+	public function getSetting($arrOfObjects, $settingPath, $default)
+	{
+		foreach ($arrOfObjects as $xmlObjectCheck)
+		{
+			$value = $this->ifCheckArray($xmlObjectCheck, $settingPath);
+			if($value !== null)
+			{
+				return $value;
+			}
+		}
+		return
 }
