@@ -15,7 +15,22 @@
 		?>
 		<div class="mainContent" >
 			<!-- Default content -->
-			<?php require_once($core->getContent($baseXmlGen)); ?>
+			<?php
+				$contentType 		= (string)$core->getSetting(
+					array($baseXmlGen, $layoutFileGen),
+					array("settings","body","mainContent","content","type"),
+					"custom");
+				if($contentType !== "custom")
+				{
+					$module = $core->getModule(array($baseXmlGen, $layoutFileGen), $contentType);
+					require_once($module["file"]);
+				}
+				else
+				{
+					include($core->getContent($baseXmlGen));
+						
+				}
+			?>
 		</div>
 		<?php
 			$headerModules = $core->getModules($layoutFileGen,"footer");
