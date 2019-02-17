@@ -172,5 +172,6 @@ class core
 				return $value;
 			}
 		}
-		return
+		return;
+	}
 }
