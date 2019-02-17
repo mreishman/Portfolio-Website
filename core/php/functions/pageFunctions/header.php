@@ -3,11 +3,33 @@
 class header
 {
 
-	private $core;
+	private $data;
 
 	public function __construct()
 	{
-		$this->core = new Core();
+		$this->data = new Data();
+	}
+
+	public function loadDirFilesRec($directory, $arrayOfFiles = array(), $addedDir = "")
+	{
+		$fileList = array_diff(scandir($directory), array('..', '.'));
+		foreach ($fileList as $fileOrDir)
+		{
+			$entireFileOrDir = $directory."/".$fileOrDir;
+			if(is_dir($entireFileOrDir))
+			{
+				$arrayOfFiles = $this->loadDirFilesRec($entireFileOrDir, $arrayOfFiles, $addedDir."/".$fileOrDir);
+			}
+			elseif(is_file($entireFileOrDir) && strpos($fileOrDir, "._") !== 0)
+			{
+				$arrayOfFiles[$entireFileOrDir] = array(
+					"fileName"			=>	$fileOrDir,
+					"fileNamePlusPath"	=>	$addedDir."/".$fileOrDir,
+					"path"				=>	$addedDir
+				);
+			}
+		}
+		return $arrayOfFiles;
 	}
 
 	private function generateFileTier($newKeyArray, $fileTierInfo)
@@ -78,7 +100,12 @@ class header
 		{
 			$xmlDir = $currentDir."local/xml/content/";
 		}
-		$arrayOfFiles = $this->core->loadDirFilesRec($xmlDir);
+		$arrayOfFiles = $this->loadDirFilesRec($xmlDir);
+		$currentURI = "$_SERVER[REQUEST_URI]";
+		if("$_SERVER[REQUEST_URI]" === "/")
+		{
+			$currentURI = "/home";
+		}
 		foreach ($arrayOfFiles as $currentFileKey => $currentFile)
 		{
 			$xmlLayout = simplexml_load_file($currentFileKey);
@@ -96,11 +123,6 @@ class header
 				$arrayOfFiles[$currentFileKey]["image"] = (string)$xmlLayout->menu->image;
 			}
 			$current = 0;
-			$currentURI = "$_SERVER[REQUEST_URI]";
-			if("$_SERVER[REQUEST_URI]" === "/")
-			{
-				$currentURI = "/home";
-			}
 			if($currentURI === explode(".xml", $arrayOfFiles[$currentFileKey]["fileNamePlusPath"])[0])
 			{
 				$current = 1;
@@ -163,6 +185,7 @@ class header
 
 	public function generateNavUL($navArray, $htmlToReturn = "")
 	{
+		$baseUrl = $this->data->getValue("baseUrl");
 		$htmlToReturn .= "<ul>";
 		foreach ($navArray as $key => $value)
 		{
@@ -182,7 +205,7 @@ class header
 					$linkForAtag = "";
 					if(isset($value["fileNamePlusPath"]))
 					{
-						$linkForAtag = " href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\""; 
+						$linkForAtag = " href=\"".$baseUrl.explode(".xml", $value["fileNamePlusPath"])[0]."\""; 
 					}
 					else
 					{
@@ -229,7 +252,7 @@ class header
 				{
 					$classText = $classToAdd;
 				}
-				$htmlToReturn .= "<li><a ".$classText." href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a></li>";
+				$htmlToReturn .= "<li><a ".$classText." href=\"".$baseUrl.explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$value["name"]."</a></li>";
 			}
 		}
 		$htmlToReturn .= "</ul>";
@@ -240,6 +263,7 @@ class header
 	{
 		//@TODO add grid / list view options
 		//@TODO add more than one layer support
+		$baseUrl = $this->data->getValue("baseUrl");
 		$htmlToReturn .= "<ul>";
 		foreach ($navArray as $key => $value)
 		{
@@ -308,7 +332,7 @@ class header
 					$image = "<img align=\"left\" src=\"".$value["image"]."\">";
 				}
 				//@TODO add option for different size
-				$htmlToReturn .= "<li><a ".$classText." href=\"".explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$image."<h2>".$value["name"]."</h2><p>".$description."</p></a></li>";
+				$htmlToReturn .= "<li><a ".$classText." href=\"".$baseUrl.explode(".xml", $value["fileNamePlusPath"])[0]."\" >".$image."<h2>".$value["name"]."</h2><p>".$description."</p></a></li>";
 			}
 		}
 		$htmlToReturn .= "</ul>";
