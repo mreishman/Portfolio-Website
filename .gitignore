@@ -5,7 +5,7 @@ core/css/vars.css.map
 local/*
 Log-Hog/*
 status/*
-
+.sass-cache/
 
 media/*
 !media/img/about/filestructure.png
