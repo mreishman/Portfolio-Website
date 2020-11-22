@@ -1,6 +1,10 @@
 <header>
 	<nav class="navigationMain" >
-		<a href="<?php echo $core->getValue("baseUrl"); ?>" ><img src="/media/img/main/logo.png" height="42px" style="display: inline-block;" ></a>
+		<?php if (file_exists(BP . "media/img/main/logo.png")): ?>
+			<a href="<?php echo $core->getValue("baseUrl"); ?>" >
+				<img src="/media/img/main/logo.png" height="42px" style="display: inline-block;" >
+			</a>
+		<?php endif; ?>
 		<input type="checkbox" id="mainNavigationToggle" checked>
 		<label for="mainNavigationToggle" class="mobileNavButton">
 			<span class="navIconChecked">
