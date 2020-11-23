@@ -70,8 +70,8 @@
 	  		</div>
 	  	</div>
 		<?php
-			$headerModules = $core->getModules($layoutFileGen,"footer");
-			foreach ($headerModules as $module)
+			$footerModules = $core->getModules($layoutFileGen,"footer");
+			foreach ($footerModules as $module)
 			{
 				require_once($module["file"]);
 			}
