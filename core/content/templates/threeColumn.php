@@ -29,11 +29,11 @@
 			<?php
 				$contentClass 	= $core->getSetting(
 					array($baseXmlGen, $layoutFileGen),
-					array("settings","body","mainContent","contentThree","columnWidth"),
+					array("settings","body","mainContent","contentTwo","columnWidth"),
 					"40");
 				$hideMobile 		= (string)$core->getSetting(
 					array($baseXmlGen, $layoutFileGen),
-					array("settings","body","mainContent","contentThree","hideMobile"),
+					array("settings","body","mainContent","contentTwo","hideMobile"),
 					"false");
 				if($hideMobile === "true")
 				{
