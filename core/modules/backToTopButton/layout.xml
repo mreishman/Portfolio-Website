@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+	<content>
+		<group>base</group>
+		<file>backToTopButton</file>
+		<type>php</type>
+	</content>
+	<cssFiles>
+		<cssFile>
+			<file>backToTopButton.css</file>
+			<map>backToTopButton.css.map</map>
+			<group></group>
+		</cssFile>
+	</cssFiles>
+	<jsFiles>
+		<jsFile>
+			<file>backToTopButton.js</file>
+			<group></group>
+		</jsFile>
+	</jsFiles>
+</page>

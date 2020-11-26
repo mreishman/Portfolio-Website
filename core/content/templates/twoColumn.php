@@ -3,7 +3,9 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><?php echo $baseXmlGen->title; ?></title>
-		<link rel="shortcut icon" type="image/png" href="/media/img/main/favicon.png"/>
+		<?php if(file_exists(BP . "/media/img/main/favicon.png")): ?>
+			<link rel="shortcut icon" type="image/png" href="/media/img/main/favicon.png"/>
+		<?php endif; ?>
 	</head>
 	<body>
 		<?php
@@ -66,8 +68,8 @@
 	  		</div>
 	  	</div>
 		<?php
-			$headerModules = $core->getModules($layoutFileGen,"footer");
-			foreach ($headerModules as $module)
+			$footerModules = $core->getModules($layoutFileGen,"footer");
+			foreach ($footerModules as $module)
 			{
 				require_once($module["file"]);
 			}
