@@ -86,13 +86,21 @@ class core
 	{
 		//js files
 		$listOfJsFiles = $this->generateJsLinks($layoutFileGen);
-		foreach ($listOfJsFiles as $fileData) {
-			echo "<script type=\"text/javascript\" src=\"".$fileData["fileName"]."?v=".$fileData["time"]."\"></script>";
+		foreach ($listOfJsFiles as $fileData)
+		{
+			if (file_exists(BP . $fileData["fileName"]))
+			{
+				echo "<script type=\"text/javascript\" src=\"".$fileData["fileName"]."?v=".$fileData["time"]."\"></script>";
+			}
 		}
 		//css files
 		$listOfCssFiles = $this->generateCssLinks($layoutFileGen);
-		foreach ($listOfCssFiles as $fileData) {
-			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$fileData["fileName"]."?v=".$fileData["time"]."\">";
+		foreach ($listOfCssFiles as $fileData)
+		{
+			if (file_exists(BP . $fileData["fileName"]))
+			{
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/".$fileData["fileName"]."?v=".$fileData["time"]."\">";
+			}
 		}
 		//return main file path
 		return $this->getFile("content/".$layoutFileGen->$contentType->group."/".$layoutFileGen->$contentType->file.".".$layoutFileGen->$contentType->type,"content/base/404.html");
@@ -135,6 +143,9 @@ class core
 
 	public function getModule($layoutFileGen, $module)
 	{
+		if (!$layoutFileGen->modules->$module) {
+			return $this->getFile("content/base/blank.php");
+		}
 		return $this->getFile("content/".$layoutFileGen->modules->$module->content->group."/".$layoutFileGen->modules->$module->content->file.".".$layoutFileGen->modules->$module->content->type);
 	}
 

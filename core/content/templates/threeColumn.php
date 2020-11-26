@@ -3,7 +3,9 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><?php echo $baseXmlGen->title; ?></title>
-		<link rel="shortcut icon" type="image/png" href="/media/img/main/favicon.png"/>
+		<?php if(file_exists(BP . "/media/img/main/favicon.png")): ?>
+			<link rel="shortcut icon" type="image/png" href="/media/img/main/favicon.png"/>
+		<?php endif; ?>
 	</head>
 	<body>
 		<?php require_once($core->getModule($layoutFileGen,"header")); ?>
@@ -29,11 +31,11 @@
 			<?php
 				$contentClass 	= $core->getSetting(
 					array($baseXmlGen, $layoutFileGen),
-					array("settings","body","mainContent","contentThree","columnWidth"),
+					array("settings","body","mainContent","contentTwo","columnWidth"),
 					"40");
 				$hideMobile 		= (string)$core->getSetting(
 					array($baseXmlGen, $layoutFileGen),
-					array("settings","body","mainContent","contentThree","hideMobile"),
+					array("settings","body","mainContent","contentTwo","hideMobile"),
 					"false");
 				if($hideMobile === "true")
 				{
