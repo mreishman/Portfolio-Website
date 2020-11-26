@@ -143,6 +143,9 @@ class core
 
 	public function getModule($layoutFileGen, $module)
 	{
+		if (!$layoutFileGen->modules->$module) {
+			return $this->getFile("content/base/blank.php");
+		}
 		return $this->getFile("content/".$layoutFileGen->modules->$module->content->group."/".$layoutFileGen->modules->$module->content->file.".".$layoutFileGen->modules->$module->content->type);
 	}
 
