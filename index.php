@@ -1,6 +1,6 @@
 <?php
 define('BP', dirname(realpath(__FILE__)).'/');
-require_once(dirname(__file__)."/core/php/functions/loader.php");
+require_once(BP."core/php/functions/loader.php");
 $page = "home";
 if (!empty($_GET['page']))
 {
