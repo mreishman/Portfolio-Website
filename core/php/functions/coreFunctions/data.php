@@ -9,16 +9,14 @@ class data
 	public function __construct()
 	{
 		$this->core = new Core();
-		$currentDir = realpath(__DIR__ . '/../../../..')."/";
-
 
 		$this->customConfig = new SimpleXMLElement("<config></config>");
-		if(file_exists($currentDir."local/xml/config.xml"))
+		if(file_exists(BP."local/xml/config.xml"))
 		{
-			$this->customConfig = simplexml_load_file($currentDir."local/xml/config.xml");
+			$this->customConfig = simplexml_load_file(BP."local/xml/config.xml");
 		}
 
-		$this->defaultConfig = simplexml_load_file($currentDir."core/xml/config.xml");
+		$this->defaultConfig = simplexml_load_file(BP."core/xml/config.xml");
 	}
 
 	public function getValue($key)
