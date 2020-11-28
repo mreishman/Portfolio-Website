@@ -91,6 +91,10 @@ class gallery
 				$thumb = $value["thumb"];
 			}
 			$target = "";
+			if(isset($config["target"]))
+			{
+				$target = " target=\"".$config["target"]."\"";
+			}
 			if(isset($value["target"]))
 			{
 				$target = " target=\"".$value["target"]."\"";
