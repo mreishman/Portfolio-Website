@@ -25,7 +25,10 @@
 				if($contentType !== "custom")
 				{
 					$module = $core->getModule(array($baseXmlGen, $layoutFileGen), $contentType);
-					require_once($module["file"]);
+					if($module)
+					{
+						require_once($module["file"]);
+					}
 				}
 				else
 				{
