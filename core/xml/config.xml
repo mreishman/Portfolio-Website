@@ -5,4 +5,7 @@
 		<defaultPageXml>core/xml/errors/404.xml</defaultPageXml>
 		<defaultContentXml>content/base/404.html</defaultContentXml>
 	</general>
+	<gallery>
+		<tag>div</tag>
+	</gallery>
 </config>

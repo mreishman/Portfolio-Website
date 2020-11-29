@@ -12,6 +12,12 @@
 				<enabled>true</enabled>
 			</module>
 		</header>
+		<header>
+			<module>
+				<name>backToTopButton</name>
+				<enabled>true</enabled>
+			</module>
+		</header>
 		<mainContentInline>
 			<module>
 				<name>sidebarNavigation</name>
