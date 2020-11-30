@@ -22,34 +22,19 @@ class gallery
 		$galleryThumbWidth = "50";
 		$galleryThumbHeight = "auto";
 		$galleryThumbs = true;
+		$tagClass = "";
 		//Check for custom settings
-		if(isset($config["tag"]))
+		$configChecks = ["tag","imgWidth","imgHeight","arrows","galleryThumbWidth","galleryThumbHeight","galleryThumbs"];
+		foreach ($configChecks as $configVar)
 		{
-			$tag = $config["tag"];
+			if(isset($config[$configVar]))
+			{
+				$$configVar = $config[$configVar];
+			}
 		}
-		if(isset($config["imgWidth"]))
+		if(isset($config["tagClass"]))
 		{
-			$imgWidth = $config["imgWidth"];
-		}
-		if(isset($config["imgHeight"]))
-		{
-			$imgHeight = $config["imgHeight"];
-		}
-		if(isset($config["arrows"]))
-		{
-			$arrows = $config["arrows"];
-		}
-		if(isset($config["galleryThumbWidth"]))
-		{
-			$galleryThumbWidth = $config["galleryThumbWidth"];
-		}
-		if(isset($config["galleryThumbHeight"]))
-		{
-			$galleryThumbHeight = $config["galleryThumbHeight"];
-		}
-		if(isset($config["galleryThumbs"]))
-		{
-			$galleryThumbs = $config["galleryThumbs"];
+			$tagClass = " class=\"".$config["tagClass"]."\" ";
 		}
 		$arrayOfImagesCount = count($arrayOfImages);
 		$arrayOfImagesCounter = 0;
@@ -78,17 +63,19 @@ class gallery
 			";
 			}
 			$id = $this->getDefaultId($value);
-			$htmlToReturn .= "<".$tag.">";
+			$htmlToReturn .= "<".$tag." ".$tagClass." >";
 			$link = "#".$id;
 			$image = $value["src"];
 			$thumb = $value["src"];
-			if(isset($value["link"]))
+			$configChecks = ["link","thumb"];
+			$aClass = "";
+			$imgClass = "";
+			foreach ($configChecks as $configVar)
 			{
-				$link = $value["link"];
-			}
-			if(isset($value["thumb"]))
-			{
-				$thumb = $value["thumb"];
+				if(isset($value[$configVar]))
+				{
+					$$configVar = $value[$configVar];
+				}
 			}
 			$target = "";
 			if(isset($config["target"]))
@@ -99,9 +86,21 @@ class gallery
 			{
 				$target = " target=\"".$value["target"]."\"";
 			}
+			$configChecks = ["aClass","imgClass"];
+			foreach ($configChecks as $configVar)
+			{
+				if(isset($config[$configVar]))
+				{
+					$$configVar = " class=\"".$config[$configVar]."\" ";
+				}
+				if(isset($value[$configVar]))
+				{
+					$$configVar = " class=\"".$value[$configVar]."\" ";
+				}
+			}
 			$htmlToReturn .= 	"
-				<a href=\"".$link."\"".$target.">
-					<img src=\"".$thumb."\" width=\"".$imgWidth."\" height=\"".$imgHeight."\" >
+				<a href=\"".$link."\"".$target." ".$aClass.">
+					<img src=\"".$thumb."\" width=\"".$imgWidth."\" height=\"".$imgHeight."\" ".$imgClass.">
 				</a>";
 			if($link === "#".$id)
 			{
